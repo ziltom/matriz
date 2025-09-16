@@ -240,7 +240,7 @@ public class LinearAlgebra {
             return null;
         } else if (indeterminado) {
             System.out.println("Sistema possível indeterminado (infinitas soluções).");
-            return null;
+
         } else {
             System.out.println("Sistema possível determinado (solução única).");
         }
@@ -249,7 +249,7 @@ public class LinearAlgebra {
     }
 
     public void mostrarMatriz(double elements[][]) {
-        if (elements == null) { // evita erro
+        if (elements == null) {
             return;
         }
 
