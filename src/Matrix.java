@@ -1,6 +1,6 @@
 public class Matrix {
 
-     int rows;
+        int rows;
      int colums;
      double[][] elements;
 

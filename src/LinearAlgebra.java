@@ -33,6 +33,7 @@ public class LinearAlgebra {
             }
         } else {
             System.out.println("Impossível");
+            return null;
         }
 
         return resultado;
@@ -48,6 +49,7 @@ public class LinearAlgebra {
 
         } else {
             System.out.println("Impossível");
+            return null;
 
         }
 
@@ -56,7 +58,7 @@ public class LinearAlgebra {
 
 
     public double[][] times(double elements[][], double elements2[][]) {
-        double resultado[][] = new double[elements.length][elements[0].length];
+        double resultado[][] = new double[elements.length][elements2[0].length];
 
         if (elements.length == elements2.length && elements[0].length == elements2[0].length) {
 
@@ -68,6 +70,7 @@ public class LinearAlgebra {
             }
         } else {
             System.out.println("Impossível");
+            return null;
         }
 
         return resultado;
@@ -81,13 +84,15 @@ public class LinearAlgebra {
             }
         } else{
             System.out.println("Impossível");
+            return null;
         }
         return resultado;
     }
 
 
     public double[][] dot(double elements[][], double elements2[][]) {
-        double resultado[][] = new double[elements.length][elements[0].length];
+        double resultado[][] = new double[elements.length][elements2[0].length];
+
         if (elements[0].length == elements2.length) {
 
 
@@ -105,6 +110,7 @@ public class LinearAlgebra {
 
         } else{
             System.out.println("Impossível");
+            return null;
         }
 
 
@@ -153,7 +159,6 @@ public class LinearAlgebra {
                 }
             }
         }
-
         return mat;
     }
 
@@ -208,11 +213,45 @@ public class LinearAlgebra {
             }
         }
 
+        boolean impossivel = false;
+        boolean indeterminado = false;
+
+        for (int i = 0; i < n; i++) {
+            boolean linhaTodaZero = true;
+            for (int j = 0; j < m - 1; j++) {
+                if (res[i][j] != 0) {
+                    linhaTodaZero = false;
+                    break;
+                }
+            }
+
+            if (linhaTodaZero && res[i][m - 1] != 0) {
+                impossivel = true;
+                break;
+            }
+
+            if (linhaTodaZero && res[i][m - 1] == 0) {
+                indeterminado = true;
+            }
+        }
+
+        if (impossivel) {
+            System.out.println("Sistema impossível (sem solução).");
+            return null;
+        } else if (indeterminado) {
+            System.out.println("Sistema possível indeterminado (infinitas soluções).");
+            return null;
+        } else {
+            System.out.println("Sistema possível determinado (solução única).");
+        }
+
         return res;
     }
 
     public void mostrarMatriz(double elements[][]) {
-
+        if (elements == null) { // evita erro
+            return;
+        }
 
         for (int i = 0; i < elements.length; i++) {
             for (int j = 0; j < elements[0].length; j++) {
@@ -223,6 +262,9 @@ public class LinearAlgebra {
     }
 
     public void mostrarVector(double vector[]){
+        if (vector==null){
+            return;
+        }
         for (int i=0; i<vector.length; i++){
             System.out.print(vector[i]);
             System.out.print(" ");
